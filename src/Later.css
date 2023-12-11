@@ -1,0 +1,49 @@
+
+.container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .hr-divider {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .player-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .grid-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+
+  
+.center-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; 
+  }
+  
+  .confirm-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .confirm-button:hover {
+    background-color: #45a049;
+  }
+  

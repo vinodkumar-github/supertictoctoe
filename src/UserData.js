@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Later from './Later';
 import './UserData.css';
 
-function UserData() {
+function UserData({setConfirmed}) {
     const initialGameData ={
     player1: '',
     player2: '',
@@ -116,7 +116,7 @@ function UserData() {
         </div>
       </form>
     </div>
-    {gameData.submitted? <Later/> : <></>}
+    {gameData.submitted? <Later gameData={gameData}  setConfirmed={setConfirmed}/> : <></>}
     </div>
   );
 }

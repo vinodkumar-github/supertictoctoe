@@ -1,10 +1,12 @@
+import React, { useState } from 'react';
 import './App.css';
 import UserData from './UserData';
 
 function App() {
+ const [confirmed, setConfirmed] = useState(false);
   return (
     <div className="App">
-      <UserData/>
+     {!confirmed ? <UserData setConfirmed={setConfirmed}/> : <></>}
     </div>
   );
 }
