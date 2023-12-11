@@ -1,0 +1,93 @@
+/* UserData.css */
+
+.UserDataContainer {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 20px;
+  }
+  
+  .UserDataForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .Label {
+    padding: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .ModeLabel {
+    padding: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .InputField {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    width: 95%;
+  }
+  .GridInputField {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    width: 95%;
+  }
+  
+  .ModeContainer {
+    margin-bottom: 15px;
+  }
+  
+  .RadioLabel {
+    padding: 5px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .RadioButton {
+    margin-right: 5px;
+  }
+  
+  .GridContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .SubmitButton {
+    width: 43%;
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: #41b444;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .SubmitButton:hover {
+    background-color: #02d10d;
+  }
+  .ResetButton {
+    width: 43%;
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: #ea624a;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .ResetButton:hover {
+    background-color: rgb(228, 1, 1)
+  }
+  
