@@ -1,0 +1,67 @@
+.GamePlayers {
+    box-sizing: border-box;
+    display: flex;
+    
+}
+
+.GameP1 {
+    border: 2px solid #000000;
+    margin-left: 10%;
+    width: 20%;
+    padding: 10px;
+    text-align: center;
+}
+
+.GameP2{
+    border: 2px solid #000000;
+    margin-left: 35%;
+    width: 20%;
+    padding:10px;
+    text-align: center;
+}
+
+
+
+.Grid {
+    display: flex;
+    flex-direction: column;
+    width: fit-content; 
+    
+  }
+  
+ 
+  .SuperGrid {
+    display: flex;
+    flex-direction: row;
+  }
+  .Centering {
+    margin-left: 31vw;
+    
+  }
+
+ 
+  .gridColumn {
+    display: flex;
+    flex-direction: column;
+  }
+  
+ 
+  .gridRow {
+    border: 1px solid #000; 
+    width: 50px;
+    height: 50px; 
+    text-align: center;
+    line-height: 50px; 
+    margin: 2px; 
+    cursor:pointer;
+    font-size: x-small;
+  }
+  
+  
+ 
+  .gridRow:hover {
+    background-color: lightgray;
+  }
+  .Bordering{
+    border: 1px solid #000; 
+  }

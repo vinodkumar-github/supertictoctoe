@@ -1,16 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Later from './Later';
 import './UserData.css';
 
-function UserData({setConfirmed}) {
-    const initialGameData ={
-    player1: '',
-    player2: '',
-    mode: '',
-    grid: '',
-    submitted: false
-  };
-  const [gameData, setGameData] = useState({ ...initialGameData });
+function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
+   
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,7 +26,8 @@ function UserData({setConfirmed}) {
     };
 
     setGameData(updatedGameData);
-    console.log(updatedGameData);
+    console.log(gameData);
+   
   };
   const handleReset = () => {
     setGameData({ ...initialGameData });

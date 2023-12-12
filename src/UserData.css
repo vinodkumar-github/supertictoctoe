@@ -1,14 +1,17 @@
-/* UserData.css */
+
 
 .UserDataContainer {
-    width: 80%;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    margin-top: 20px;
-  }
+  width: calc(10vw + 300px); 
+  min-height:calc(10vw + 300px);
+  
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
   
   .UserDataForm {
     display: flex;
