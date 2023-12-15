@@ -63,7 +63,7 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
         <br />
           <label className='ModeLabel'>Mode:</label>
           <br /><br />
-          <label htmlFor="Super" className='RadioLabel'>
+          <label htmlFor="Super" className='RadioLabel'style={(gameData.mode === "Super")? {fontSize:'large',fontWeight:'bolder'}:null}>
             <input
               type="radio"
               id="Super"
@@ -73,9 +73,26 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
               checked={gameData.mode === 'Super'}
               onChange={handleInputChange}
             />
-            {gameData.mode === "Super" ? "Super TicTacToe - - - [3×3×3]Grid": "Super TicTacToe"}
+            {gameData.mode === "Super" && gameData.grid >= 3 ? <text>Super TicTacToe:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{gameData.grid}×{gameData.grid}×{gameData.grid}]Grid</text>: "Super TicTacToe"}
           </label>
-          <label htmlFor="Classic" className='RadioLabel'>
+          {gameData.mode === "Super" ? (
+          <div className='GridContainer'>
+            <label htmlFor="grid" className='Label'>Grid Size:</label>
+            <input
+              type='number'
+              min={3}
+              id="grid"
+              name="grid"
+              value={gameData.grid}
+              onChange={handleInputChange}
+              placeholder='Select 3 or above'
+              defaultValue={3}
+              required
+              className='GridInputField'
+            />
+          </div>
+        ) : null}
+          <label htmlFor="Classic" className='RadioLabel' style={(gameData.mode === "Classic")? {fontSize:'large',fontWeight:'bolder'}:null}>
             <input
               type="radio"
               id="Classic"
@@ -85,7 +102,7 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
               checked={gameData.mode === 'Classic'}
               onChange={handleInputChange}
             />
-            {gameData.mode === "Classic" && gameData.grid >= 3 ? `Super TicTacToe - - - [${gameData.grid}×${gameData.grid}×${gameData.grid}]Grid`: "Classic"}
+            {gameData.mode === "Classic" && gameData.grid >= 3 ?  <text>Classic TicTacToe:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{gameData.grid}×{gameData.grid}×{gameData.grid}]Grid</text>: "Classic TicTacToe"}
           </label>
         </div>
         {gameData.mode === "Classic" ? (
@@ -104,6 +121,7 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
             />
           </div>
         ) : null}
+        
         <div className='ButtonContainer'>
         <button type="submit" className='SubmitButton'>Submit</button>
         <button type="button" className='ResetButton' onClick={handleReset}>Reset</button>

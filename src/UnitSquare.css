@@ -1,0 +1,45 @@
+.eachRow {
+    width: fit-content;
+  }
+  
+  .eachColumn {
+    width: fit-content;
+    display: flex;
+  }
+  
+  .unitMatrix {
+   
+    width: fit-content;
+    font-size: xx-small;
+    display: block;
+    margin: 2px;
+    border: 10px solid white;
+    
+  }
+  
+  .unitCell {
+    display: flex;
+    border: 1px solid black;
+    width: 5vw; 
+    height: 5vw; 
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 50px;
+    max-height: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ 
+  @media screen and (max-width: 768px) {
+
+    .unitCell {
+      width: 8vw; 
+      height: 8vw;
+      min-width: 30px;
+      min-height: 30px;
+      max-width: 40px;
+      max-height: 40px;
+      font-size: 8px;
+    }
+  }

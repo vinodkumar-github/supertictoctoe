@@ -1,102 +1,158 @@
-import React,{useState} from 'react'
-import './Game.css'
-import Invigil from './Invigil';
-function createMatrix() {
-    const supermatrix =[];
-     for(let h=0; h<3;h++){
-     const matrix = [];
-     
-     for (let i = 0; i < 3; i++) {
-       const subMatrixRow = [];
-       
-       for (let j = 0; j < 3; j++) {
-         const subMatrix = [];
-         
-         for (let k = 0; k < 3; k++) {
-           subMatrix.push(`${h}-${i}-${j}-${k}`); // Assigning index values
-         }
-         
-         subMatrixRow.push(subMatrix);
-       }
-       
-       matrix.push(subMatrixRow);
-     }
-       supermatrix.push(matrix)
-     }
-     
-     return supermatrix;
-   }
+import React, {useEffect, useState} from 'react';
+import './Game.css';
+import UnitSquare from './UnitSquare';
 
- 
+
+function createULT(n, mat, setMatrix,turnX, setTurnX, progress, setProgress, gameOver) {
+  
+  const gCol = [];
+  for (let i = 0; i < n; i++) {
+    const gRow = [];
+    for (let j = 0; j < n; j++) {
+      gRow.push(<div key={`Row-${i}-${j}`} id={`Row-${i}-${j}`}className='mainRow'><UnitSquare key={`${i}-${j}`}  n= {n} i={i} j={j} mat={mat} setMatrix={setMatrix} turnX={turnX} setTurnX={setTurnX} progress ={progress} setProgress={setProgress} gameOver={gameOver}/></div>);
+    }
+    gCol.push(<div key = {`Col-${i}`} id={`Col-${i}`} className='mainCol'>{gRow}</div>);
+  }
+  return gCol; 
+}
+function createMatrix(n) {
+  const newMatrix = [];
+
+  for (let i = 0; i < n; i++) {
+    const inner1 = [];
+    for (let j = 0; j < n; j++) {
+      const inner2 = [];
+      for (let k = 0; k < n; k++) {
+        const inner3 = [];
+        for (let l = 0; l < n; l++) {
+          inner3.push(`${i}-${j}-${k}-${l}`);
+        }
+        inner2.push(inner3);
+      }
+      inner1.push(inner2);
+    }
+    newMatrix.push(inner1);
+  }
+
+  return newMatrix;
+}
+
+function createFilledMatrix(n,c) {
+  let newMatrix = [];
+
+  for (let i = 0; i < n; i++) {
+    const inner1 = [];
+    for (let j = 0; j < n; j++) {
+      const inner2 = [];
+      for (let k = 0; k < n; k++) {
+        const inner3 = [];
+        for (let l = 0; l < n; l++) {
+          inner3.push(c);
+        }
+        inner2.push(inner3);
+      }
+      inner1.push(inner2);
+    }
+    newMatrix.push(inner1);
+  }
+
+  return newMatrix;
+}
+function hasWon(matrix, c) {
+  const isHorizontalWin = matrix.some(row => row.every(cell => cell === c));
+  const isDiagonal1Win = matrix.every((row, index) => row[index] === c);
+  const isDiagonal2Win = matrix.every((row, index) => row[matrix.length - 1 - index] === c);
+
+  const isVerticalWin = [...matrix.keys()].some(p => matrix.every(row => row[p] === c));
+
+  return isHorizontalWin || isVerticalWin || isDiagonal1Win || isDiagonal2Win;
+}
+
+
 
 
 function Game({gameData}) {
-    const matri = createMatrix();
-    const [matrix, setMatrix] = useState(matri)
-    function handleMatrix(e, matrix, setMatrix) {
-        const cellValue = e.target.textContent;
-        const newArray = cellValue.split('-');
-        const [h, i, k, j] = newArray;
-      
-        const updatedMatrix = [...matrix];
-        updatedMatrix[h][i][k][j] = '';
-      
-        setMatrix(updatedMatrix);
-      }
-
-
-function grid(gameData,matrix,h,i) {
-
-    if (gameData['mode'] === "Super") {
-        
-      const gridElements = [];
-     
-        const columns = [];
-        for (let j = 0; j <= 2; j++) {
-          const rows = [];
-          for (let k = 0; k <= 2; k++) {
-            rows.push(
-              <p key={`${h}-${i}-${k}-${j}`} className="gridRow" id={`${j}-${i}-${k}-${j}`} onClick={(e)=>{ handleMatrix(e,matrix, setMatrix)}} >{matrix[h][i][k][j]}</p>
-            );
-          }
-          columns.push(
-            <div key={`col-${h}-${i}-${j}`} className='gridColumn'>{rows}</div>
-          );
+  const n = gameData.grid;
+  const Matrix = createMatrix(n);
+  const [matrix, setMatrix] = useState(Matrix);
+  const turnXinit = [true, '','']
+  const [progress, setProgress] = useState(['']);
+  const[turnX, setTurnX] = useState(turnXinit);
+  const [gameWins, setGameWins] = useState(() => createFilledMatrix(n,''));
+  const [gameOver, setGameOver] = useState([false, '']);
+  const xmatriX = createFilledMatrix(n,'X');
+  const omatriX = createFilledMatrix(n,'O')
+  useEffect(() => {
+    setGameWins(prevGameWins => {
+      const updatedGameWins = [...prevGameWins]; 
+      progress.forEach(cell => {
+        if (cell !== '') {
+          const [row, col, value] = cell.split('-');
+        if (updatedGameWins[row]) {
+            updatedGameWins[row][col] = value;
         }
-        gridElements.push(
-          <div key={`row-${h}-${i}`} className='SuperGrid'>{columns}</div>
-        );
-      
-      return <div className='Grid Bordering'>{gridElements}</div>;
-    }
-  }
+        }
+      });
+      return updatedGameWins;
+    });
+  }, [progress]);
+  useEffect (() => {
+   if (hasWon(gameWins, 'X')) {
+    setMatrix(xmatriX);
+    setGameOver([true,'X'])
+   }
+   else if (hasWon(gameWins, 'O')) {
+    setMatrix(omatriX);
+    setGameOver([true,'O'])
+   }
+   else if (gameWins.every(row => row.every(cell => cell === 'X' || cell === 'O')) && gameWins.some(row => row.some(cell => cell === 'X' )) && gameWins.some(row => row.some(cell => cell === 'O' ))){
+    setGameOver([true,'D'])
+   }
+  },[gameWins,xmatriX,omatriX])
   
-  return (
-    <div>
-        <div className='GamePlayers'>
-            <p className='GameP1'>Player 1: {gameData.player1.toUpperCase()} <br/>(X)</p>
-            <p className='GameP2'>Player 2: {gameData.player2.toUpperCase()} <br/>(O)</p>
-        </div>
-        <div className='Grid'>
-  <div className='SuperGrid Centering'>
-    {grid(gameData,matrix,0,0)}
-    {grid(gameData,matrix,0,1)}
-    {grid(gameData,matrix,0,2)}
-  </div>
-  <div className='SuperGrid Centering'>
-    {grid(gameData,matrix,1,0)}
-    {grid(gameData,matrix,1,1)}
-    {grid(gameData,matrix,1,2)}
-  </div>
-  <div className='SuperGrid Centering'>
-    {grid(gameData,matrix,2,0)}
-    {grid(gameData,matrix,2,1)}
-    {grid(gameData,matrix,2,2)}
-  </div>
-</div>
-<Invigil setMatrix = {setMatrix}/>
+
+   return (
+    <>
+    <div className='super'>
+    <div className='GamePlayers'>
+            <p className='GameP1' id='GameP1' style={(turnX[0]===true)?{backgroundColor:'slateblue', color:'white', fontWeight:'bolder',fontSize:'Large'}:{backgroundColor:'white'}} >Player 1: {gameData.player1.toUpperCase()} <br/>(X)</p>
+            <p className='GameP2' id = 'GameP2' style={(turnX[0]===false)?{backgroundColor:'orange',color:'black',fontWeight:'bolder',fontSize:'Large'}:{backgroundColor:'white'}}>Player 2: {gameData.player2.toUpperCase()} <br/>(O)</p>
+         
     </div>
-  )
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+  { gameOver[0] && gameOver[1] === 'X' ?
+    <div style={{ color: 'slateblue', fontStyle: 'italic', fontSize: 'xx-large', fontWeight: 'bolder', textAlign: 'center' }}>
+      <p style={{ color: 'black', fontStyle: 'normal' }}>Game is over</p>
+      <p>{gameData.player1} won the match</p>
+    </div>
+    :
+    gameOver[0] && gameOver[1] === 'O' ?
+      <div style={{ color: 'orange', fontStyle: 'italic', fontSize: 'xx-large', fontWeight: 'bolder', textAlign: 'center' }}>
+        <p style={{ color: 'black', fontStyle: 'normal' }}>Game is over</p>
+        <p>{gameData.player2} won the match</p>
+      </div>
+      :
+      gameOver[0] && gameOver[1] === 'D' ?
+        <div style={{ color: 'black', fontStyle: 'italic', fontSize: 'xx-large', fontWeight: 'bolder', textAlign: 'center' }}>
+          <p style={{ color: 'black', fontStyle: 'normal' }}>Game is over</p>
+          <p>It was a draw</p>
+        </div>
+        :
+        null
+  }
+</div>
+
+    
+    
+      <div className='superColumn'>
+      <div className='superColumn1'>
+      
+        {createULT(n, matrix, setMatrix, turnX, setTurnX, progress, setProgress,gameOver)}
+        </div>
+      </div>
+    </div>
+    </>
+  );
 }
-        
-export default Game
+
+export default Game;
