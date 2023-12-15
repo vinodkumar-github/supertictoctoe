@@ -94,3 +94,18 @@
     background-color: rgb(228, 1, 1)
   }
   
+  /* For screens smaller than 600px (mobile) */
+@media only screen and (max-width: 900px) {
+  .UserDataContainer {
+    width: 90%;
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .InputField,
+  .GridInputField {
+    width: 95%; /* Make input fields take up full width */
+  }
+
+  
+}

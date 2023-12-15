@@ -13,8 +13,3 @@ code {
     monospace;
 }
 
-html {
-  width: 100%;
-  min-width: 800px;
-  overflow-x: hidden;
-}
