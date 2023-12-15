@@ -1,0 +1,36 @@
+.eachCRow{
+margin: 3px;
+width: 7vw;
+height: 7vw;
+
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+
+.CRow{
+
+    border: 2px solid black;
+   
+}
+.CCRow{
+    margin: 3px;
+    width: 7vw;
+    height: 7vw;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainCol{
+    border: 1px solid black;
+}
+.ClassicContainer{
+    margin-top: 15vwvw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

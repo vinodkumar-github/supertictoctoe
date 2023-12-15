@@ -1,67 +1,68 @@
+.superColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.superColumn1 {
+  min-width: 400px;
+  min-height: 400px;
+  width: fit-content;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  padding:  0vw 0.2vw 0.2vw 0vw;
+  background-color: black;
+}
+
+.super {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.mainRow {
+  display: block;
+  width: fit-content;
+  margin-top: 0.2vw;
+  border: 2px solid black;
+  background-color: white;
+}
 .GamePlayers {
-    box-sizing: border-box;
-    display: flex;
-    
+  box-sizing: border-box;
+  display: flex;
+  
 }
 
 .GameP1 {
-    border: 2px solid #000000;
-    margin-left: 10%;
-    width: 20%;
-    padding: 10px;
-    text-align: center;
+  border: 2px solid #000000;
+  margin-left: 10%;
+  width: 20%;
+  padding: 10px;
+  text-align: center;
 }
 
 .GameP2{
-    border: 2px solid #000000;
-    margin-left: 35%;
-    width: 20%;
-    padding:10px;
-    text-align: center;
+  border: 2px solid #000000;
+  margin-left: 35%;
+  width: 20%;
+  padding:10px;
+  text-align: center;
 }
 
+.mainCol {
+  display: flex;
+  width: fit-content;
+  margin-left: 0.2vw;
+  background-color: black;
+}
 
-
-.Grid {
-    display: flex;
-    flex-direction: column;
-    width: fit-content; 
-    
+/* Additional styles for responsiveness */
+@media screen and (max-width: 768px) {
+  .superColumn1 {
+    min-width: 250px; 
+    min-height: 250px; 
+    padding: 0vw 0.2vw 0.2vw 0vw; 
   }
-  
- 
-  .SuperGrid {
-    display: flex;
-    flex-direction: row;
-  }
-  .Centering {
-    margin-left: 31vw;
-    
-  }
-
- 
-  .gridColumn {
-    display: flex;
-    flex-direction: column;
-  }
-  
- 
-  .gridRow {
-    border: 1px solid #000; 
-    width: 50px;
-    height: 50px; 
-    text-align: center;
-    line-height: 50px; 
-    margin: 2px; 
-    cursor:pointer;
-    font-size: x-small;
-  }
-  
-  
- 
-  .gridRow:hover {
-    background-color: lightgray;
-  }
-  .Bordering{
-    border: 1px solid #000; 
-  }
+}
