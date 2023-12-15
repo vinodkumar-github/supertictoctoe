@@ -27,6 +27,24 @@ function createMatrix() {
      return supermatrix;
    }
 
+ 
+
+
+function Game({gameData}) {
+    const matri = createMatrix();
+    const [matrix, setMatrix] = useState(matri)
+    function handleMatrix(e, matrix, setMatrix) {
+        const cellValue = e.target.textContent;
+        const newArray = cellValue.split('-');
+        const [h, i, k, j] = newArray;
+      
+        const updatedMatrix = [...matrix];
+        updatedMatrix[h][i][k][j] = '';
+      
+        setMatrix(updatedMatrix);
+      }
+
+
 function grid(gameData,matrix,h,i) {
 
     if (gameData['mode'] === "Super") {
@@ -38,7 +56,7 @@ function grid(gameData,matrix,h,i) {
           const rows = [];
           for (let k = 0; k <= 2; k++) {
             rows.push(
-              <p key={`${h}-${i}-${k}-${j}`} className="gridRow" id={`${j}-${i}-${k}-${j}`} >{matrix[h][i][k][j]}</p>
+              <p key={`${h}-${i}-${k}-${j}`} className="gridRow" id={`${j}-${i}-${k}-${j}`} onClick={(e)=>{ handleMatrix(e,matrix, setMatrix)}} >{matrix[h][i][k][j]}</p>
             );
           }
           columns.push(
@@ -53,11 +71,6 @@ function grid(gameData,matrix,h,i) {
     }
   }
   
-
-
-function Game({gameData}) {
-    const matri = createMatrix();
-    const [matrix, setMatrix] = useState(matri)
   return (
     <div>
         <div className='GamePlayers'>
