@@ -16,7 +16,7 @@ function App() {
 const [gameData, setGameData] = useState({ ...initialGameData });
   return (
     <div className="App">
-     {!confirmed ? <UserData setConfirmed={setConfirmed} gameData={gameData} setGameData={setGameData} initialGameData={initialGameData }/> : gameData.mode === 'Super' ? <Game gameData={gameData} />: gameData.mode === 'Classic' ? <Classic/> : null}
+     {!confirmed ? <UserData setConfirmed={setConfirmed} gameData={gameData} setGameData={setGameData} initialGameData={initialGameData }/> : gameData.mode === 'Super' ? <Game gameData={gameData} />: gameData.mode === 'Classic' ? <Classic gameData={gameData}/> : null}
     </div>
   );
 }

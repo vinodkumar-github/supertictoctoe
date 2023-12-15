@@ -26,7 +26,7 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
     };
 
     setGameData(updatedGameData);
-    console.log(gameData);
+  
    
   };
   const handleReset = () => {
@@ -86,7 +86,7 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
               value={gameData.grid}
               onChange={handleInputChange}
               placeholder='Select 3 or above'
-              defaultValue={3}
+          
               required
               className='GridInputField'
             />
@@ -115,6 +115,7 @@ function UserData({setConfirmed, gameData, setGameData, initialGameData }) {
               name="grid"
               value={gameData.grid}
               onChange={handleInputChange}
+             
               placeholder='Select 3 or above'
               required
               className='GridInputField'

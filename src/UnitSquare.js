@@ -34,7 +34,7 @@ function UnitSquare({n, i,j,mat, setMatrix, turnX, setTurnX, progress, setProgre
       setProgress(newProgress);
 
      } else{
-      console.log(progress);
+      
       let xyx = `${c}-${d}-X`;
       let xyo =`${c}-${d}-O`;
       if( progress.some(cell => cell === xyx) ||progress.some(cell => cell === xyo)  ){
@@ -72,6 +72,7 @@ function UnitSquare({n, i,j,mat, setMatrix, turnX, setTurnX, progress, setProgre
     }
    }
   }
+  
 
   }
      
@@ -83,11 +84,11 @@ function UnitSquare({n, i,j,mat, setMatrix, turnX, setTurnX, progress, setProgre
                 rows.push(
                  <div key={`0-${i}-${j}-${k}-${l}`} id={`0-${i}-${j}-${k}-${l}`}className='unitCell'  
                  onClick={e=>handleUnitCellClick(e)} 
-                 style={ (mat[i][j][k][l]==='X')? { backgroundColor:'slateblue',color:'white', fontSize:'x-large' }: mat[i][j][k][l]==='O'?{backgroundColor:'orange', color:'black', fontSize:'x-large' }:{backgroundColor:'white'}}
+                 style={ (mat[i][j][k][l]==='X' ||  gameOver[1]==='X')? { backgroundColor:'slateblue',color:'white', fontSize:'x-large' }: mat[i][j][k][l]==='O'|| gameOver[1]==='O'?{backgroundColor:'orange', color:'black', fontSize:'x-large' }:{backgroundColor:'white'}}
                 > <p key={`${i}-${j}-${k}-${l}`} id={`${i}-${j}-${k}-${l}`} name= {`${i}-${j}-${k}-${l}`} 
                 className='eachRow' onClick={e=>handleUnitCellClick(e)} 
-                style={(mat[i][j][k][l]==='X'||mat[i][j][k][l]==='O')? {display:'flex', fontWeight:'bolder'}: {display:'none'}
-              }>{mat[i][j][k][l]}</p></div>
+                style={(mat[i][j][k][l]==='X'||gameOver[1]==='X'||mat[i][j][k][l]==='O'||gameOver[1]==='O')? {display:'flex', fontWeight:'bolder'}: {display:'none'}
+              }>{gameOver[0]? gameOver[1]: mat[i][j][k][l]}</p></div>
                   );
                    } columns.push(
                 <div key={`col-${i}-${j}-${k}`} id={`col-${i}-${j}-${k}`} className='eachColumn'>{rows}</div>

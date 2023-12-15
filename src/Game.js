@@ -58,15 +58,8 @@ function createFilledMatrix(n,c) {
 
   return newMatrix;
 }
-function hasWon(matrix, c) {
-  const isHorizontalWin = matrix.some(row => row.every(cell => cell === c));
-  const isDiagonal1Win = matrix.every((row, index) => row[index] === c);
-  const isDiagonal2Win = matrix.every((row, index) => row[matrix.length - 1 - index] === c);
 
-  const isVerticalWin = [...matrix.keys()].some(p => matrix.every(row => row[p] === c));
 
-  return isHorizontalWin || isVerticalWin || isDiagonal1Win || isDiagonal2Win;
-}
 
 
 
@@ -80,8 +73,16 @@ function Game({gameData}) {
   const[turnX, setTurnX] = useState(turnXinit);
   const [gameWins, setGameWins] = useState(() => createFilledMatrix(n,''));
   const [gameOver, setGameOver] = useState([false, '']);
-  const xmatriX = createFilledMatrix(n,'X');
-  const omatriX = createFilledMatrix(n,'O')
+ 
+  function hasWon(matrix, c) {
+    const isHorizontalWin = matrix.some(row => row.every(cell => cell === c));
+    const isDiagonal1Win = matrix.every((row, index) => row[index] === c);
+    const isDiagonal2Win = matrix.every((row, index) => row[matrix.length - 1 - index] === c);
+  
+    const isVerticalWin = [...matrix.keys()].some(p => matrix.every(row => row[p] === c));
+  
+    return isHorizontalWin || isVerticalWin || isDiagonal1Win || isDiagonal2Win;
+  }
   useEffect(() => {
     setGameWins(prevGameWins => {
       const updatedGameWins = [...prevGameWins]; 
@@ -94,21 +95,26 @@ function Game({gameData}) {
         }
       });
       return updatedGameWins;
-    });
+    }
+    );
   }, [progress]);
+  
   useEffect (() => {
    if (hasWon(gameWins, 'X')) {
-    setMatrix(xmatriX);
+   
     setGameOver([true,'X'])
    }
    else if (hasWon(gameWins, 'O')) {
-    setMatrix(omatriX);
+   
     setGameOver([true,'O'])
    }
    else if (gameWins.every(row => row.every(cell => cell === 'X' || cell === 'O')) && gameWins.some(row => row.some(cell => cell === 'X' )) && gameWins.some(row => row.some(cell => cell === 'O' ))){
     setGameOver([true,'D'])
    }
-  },[gameWins,xmatriX,omatriX])
+  },[gameWins])
+
+
+ 
   
 
    return (
